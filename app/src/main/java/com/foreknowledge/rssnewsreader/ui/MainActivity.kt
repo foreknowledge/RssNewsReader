@@ -1,7 +1,8 @@
-package com.foreknowledge.rssnewsreader
+package com.foreknowledge.rssnewsreader.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.foreknowledge.rssnewsreader.R
 
 class MainActivity : AppCompatActivity() {
 
