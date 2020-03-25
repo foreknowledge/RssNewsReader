@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.foreknowledge.rssnewsreader.R
-import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
-import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter.newsList
+import com.foreknowledge.rssnewsreader.model.News
 import com.foreknowledge.rssnewsreader.util.RssParser
 
 class SplashActivity : AppCompatActivity() {

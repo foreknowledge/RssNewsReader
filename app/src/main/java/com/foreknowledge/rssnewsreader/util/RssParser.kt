@@ -1,7 +1,7 @@
 package com.foreknowledge.rssnewsreader.util
 
 import android.util.Log
-import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
+import com.foreknowledge.rssnewsreader.NewsApplication
 import com.foreknowledge.rssnewsreader.model.News
 import com.prof.rssparser.Parser
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +31,6 @@ class RssParser {
             }
         }
 
-        NewsRecyclerAdapter.newsList = newsList
+        NewsApplication.newsList = newsList
     }
 }

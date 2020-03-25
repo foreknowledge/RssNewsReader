@@ -3,15 +3,18 @@ package com.foreknowledge.rssnewsreader.adapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 @BindingAdapter("bindBitmapImage")
-fun bindBitmapImage(view: ImageView, url: String?) {
-    Glide.with(view.context).load(url).into(view)
+fun ImageView.bindBitmapImage(url: String?) {
+    Glide.with(context).load(url).into(this)
 }
 
 @BindingAdapter("fillKeywords")
-fun fillKeywords(view: TextView, keywords: List<String>?) {
-    if (keywords == null) view.text = ""
-    else view.text = keywords.joinToString()
+fun TextView.fillKeywords(keywords: List<String>?) {
+    text = keywords?.joinToString() ?: ""
 }
+
+@BindingAdapter("bindAdapter")
+fun RecyclerView.bindAdapter(adapter: NewsRecyclerAdapter) = setAdapter(adapter)

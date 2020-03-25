@@ -7,8 +7,7 @@ import com.foreknowledge.rssnewsreader.databinding.ItemNewsBinding
 import com.foreknowledge.rssnewsreader.holder.NewsHolder
 import com.foreknowledge.rssnewsreader.model.News
 
-object NewsRecyclerAdapter : RecyclerView.Adapter<NewsHolder>() {
-    var newsList = mutableListOf<News>()
+class NewsRecyclerAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsHolder>() {
 
     override fun getItemCount(): Int = newsList.size
 

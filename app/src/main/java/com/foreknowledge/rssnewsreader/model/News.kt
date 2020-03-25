@@ -5,10 +5,8 @@ import android.util.Log
 import android.view.View
 import com.foreknowledge.rssnewsreader.ui.DetailActivity
 import com.foreknowledge.rssnewsreader.util.KeywordExtractor
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import java.lang.Exception
 
 data class News (
@@ -31,12 +29,15 @@ data class News (
         try {
             val doc = Jsoup.connect(link).get()
 
-            description = doc.select("meta[property=og:description]").getOrNull(0)?.attr("content")
-            imageUrl = doc.select("meta[property=og:image]").getOrNull(0)?.attr("content")
+            description = doc.getDescription()
+            imageUrl = doc.getImageUrl()
 
             keywords = description?.let {
                 KeywordExtractor.extract(it)
             }
         } catch (e: Exception) { Log.d("test", e.message.toString()) }
     }
+
+    private fun Document.getDescription() = select("meta[property=og:description]").getOrNull(0)?.attr("content")
+    private fun Document.getImageUrl() = select("meta[property=og:image]").getOrNull(0)?.attr("content")
 }
