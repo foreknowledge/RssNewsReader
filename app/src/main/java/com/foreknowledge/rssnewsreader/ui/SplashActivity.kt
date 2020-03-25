@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.foreknowledge.rssnewsreader.R
+import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
+import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter.newsList
+import com.foreknowledge.rssnewsreader.util.RssParser
 
 class SplashActivity : AppCompatActivity() {
 
@@ -13,6 +16,8 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed({
+            RssParser().execute()
+
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, 1300)
