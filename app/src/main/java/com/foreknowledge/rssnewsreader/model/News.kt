@@ -29,7 +29,7 @@ data class News (
         try {
             val doc = Jsoup.connect(link).get()
 
-            description = doc.getDescription()
+            description = doc.getDescription()?.trim()
             imageUrl = doc.getImageUrl()
 
             keywords = description?.let {

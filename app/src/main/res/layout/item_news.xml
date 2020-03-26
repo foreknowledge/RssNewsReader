@@ -69,6 +69,7 @@
                     android:layout_marginBottom="5dp"
                     android:text="@{news.description}"
                     android:textSize="15sp"
+                    android:inputType="none"
                     android:maxLines="2"
                     android:ellipsize="end" />
 
@@ -77,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:textColor="@android:color/holo_red_light"
+                    android:singleLine="true"
                     android:ellipsize="end"
                     app:fillKeywords="@{news.keywords}"/>
 
