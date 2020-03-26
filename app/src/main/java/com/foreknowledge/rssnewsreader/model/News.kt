@@ -10,11 +10,11 @@ import org.jsoup.nodes.Document
 import java.lang.Exception
 
 data class News (
-    var title: String? = null,
+    val title: String? = null,
     var description: String? = null,
     var imageUrl: String? = null,
     var keywords: List<String>? = null,
-    var link: String? = null
+    val link: String? = null
 ) {
     fun onClick(view: View) {
         val context = view.context

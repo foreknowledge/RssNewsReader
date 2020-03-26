@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RssNewsReader</string>
+    <string name="app_name">구글 뉴스</string>
     <string name="thumbnail_image">Thumbnail Image</string>
     <string name="loading">로딩중....</string>
 </resources>

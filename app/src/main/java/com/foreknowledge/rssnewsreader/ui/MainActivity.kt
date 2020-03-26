@@ -14,8 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
-        NewsApplication.mainRecyclerAdapter = NewsRecyclerAdapter(NewsApplication.newsList)
-        binding.adapter = NewsApplication.mainRecyclerAdapter
+        with (NewsApplication) {
+            val newsAdapter = NewsRecyclerAdapter(newsList)
+            newsAdapter.setHasStableIds(true)
+            mainRecyclerAdapter = newsAdapter
+            binding.adapter = mainRecyclerAdapter
+        }
 
     }
 }

@@ -9,6 +9,8 @@ import com.foreknowledge.rssnewsreader.model.News
 
 class NewsRecyclerAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsHolder>() {
 
+    override fun getItemId(position: Int) = newsList[position].hashCode().toLong()
+
     override fun getItemCount(): Int = newsList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder

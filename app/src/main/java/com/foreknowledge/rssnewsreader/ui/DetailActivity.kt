@@ -16,7 +16,7 @@ class DetailActivity : AppCompatActivity() {
 
         val url = intent.getStringExtra("link")
         with(binding.webView) {
-            settings.javaScriptEnabled = true
+            //settings.javaScriptEnabled = true
             webChromeClient = WebChromeClient()
             webViewClient = WebViewClient()
             loadUrl(url)
