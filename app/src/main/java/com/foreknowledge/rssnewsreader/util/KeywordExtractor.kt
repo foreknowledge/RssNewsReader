@@ -3,6 +3,7 @@ package com.foreknowledge.rssnewsreader.util
 object KeywordExtractor {
     fun extract(description: String): List<String> {
         val wordCountMap =  description
+            .removeSpecialCharacter()
             .split(" ")
             .filter { it.length > 1 }
             .groupBy { it }
@@ -20,4 +21,7 @@ object KeywordExtractor {
 
         return keywords
     }
+
+    private fun String.removeSpecialCharacter()
+            = this.replace("[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]".toRegex(), "")
 }
