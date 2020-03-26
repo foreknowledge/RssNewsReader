@@ -1,8 +1,8 @@
 package com.foreknowledge.rssnewsreader.util
 
 object KeywordExtractor {
-    fun extract(description: String): List<String> {
-        val wordCountMap =  description
+    fun extract(description: String): List<String> =
+        description
             .removeSpecialCharacter()
             .split(" ")
             .filter { it.length > 1 }
@@ -11,17 +11,11 @@ object KeywordExtractor {
             .toSortedMap()
             .toList()
             .sortedByDescending { (_, count) -> count }
+            .take(3)
             .toMap()
+            .keys
+            .toList()
 
-        val keywords = mutableListOf<String>()
-        for ((i, word) in wordCountMap.keys.withIndex()) {
-            if (i >= 3) break
-            keywords.add(word)
-        }
-
-        return keywords
-    }
-
-    private fun String.removeSpecialCharacter()
-            = this.replace("[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]".toRegex(), "")
+    private fun String.removeSpecialCharacter() =
+        this.replace("[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]".toRegex(), "")
 }
