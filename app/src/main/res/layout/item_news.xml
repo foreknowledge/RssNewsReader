@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="news"
             type="com.foreknowledge.rssnewsreader.model.News" />
@@ -71,15 +72,37 @@
                     android:text="@{news.description}"
                     android:textSize="15sp" />
 
-                <TextView
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="@android:color/holo_red_light"
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    app:fillKeywords="@{news.keywords}"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    android:scrollbars="none"
+                    android:visibility="@{news.keywords != null ? View.VISIBLE : View.INVISIBLE}" >
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:singleLine="true"
+                        app:chipSpacing="5dp">
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{news.keywords[0]}" />
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{news.keywords[1]}" />
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{news.keywords[2]}" />
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </HorizontalScrollView>
 
             </LinearLayout>
 
