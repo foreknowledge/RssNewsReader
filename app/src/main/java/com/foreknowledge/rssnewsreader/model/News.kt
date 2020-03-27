@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document
 import java.lang.Exception
 
 data class News (
+    val id: Int,
     val title: String? = null,
     var description: String? = null,
     var imageUrl: String? = null,
@@ -20,7 +21,7 @@ data class News (
         val context = view.context
 
         val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra("link", link)
+        intent.putExtra("id", id)
 
         context.startActivity(intent)
     }

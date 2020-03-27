@@ -19,8 +19,8 @@ class RssParser {
                 val articleList = parser.getChannel(rssUrl)
                 val articles = articleList.articles
 
-                for (article in articles)
-                    newsList.add(News(title = article.title, link = article.link))
+                for ((i, article) in articles.withIndex())
+                    newsList.add(News(id = i, title = article.title, link = article.link))
 
                 for (news in newsList)
                     launch {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
+import com.foreknowledge.rssnewsreader.NewsApplication
 import com.foreknowledge.rssnewsreader.R
 import com.foreknowledge.rssnewsreader.databinding.ActivityDetailBinding
 
@@ -14,12 +15,15 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
 
-        val url = intent.getStringExtra("link")
+        val id = intent.getIntExtra("id", 0)
+        val news = NewsApplication.newsList[id]
+        binding.news = news
+
         with(binding.webView) {
             //settings.javaScriptEnabled = true
             webChromeClient = WebChromeClient()
             webViewClient = WebViewClient()
-            loadUrl(url)
+            loadUrl(news.link)
         }
     }
 }
