@@ -31,7 +31,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
-            android:visibility="@{news.keywords != null ? View.VISIBLE : View.INVISIBLE}" >
+            android:visibility="@{news.keywords != null ? View.VISIBLE : View.GONE}" >
 
             <TextView
                 android:text="@{news.keywords[0]}"
