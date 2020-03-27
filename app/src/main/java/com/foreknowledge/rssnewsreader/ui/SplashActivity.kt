@@ -11,7 +11,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        RssParser().execute()
+        RssParser.execute()
 
         Handler().postDelayed({
             startActivity(Intent(this, MainActivity::class.java))

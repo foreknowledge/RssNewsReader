@@ -8,8 +8,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RssParser {
-    private val rssUrl = "https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko"
+object RssParser {
+    private const val rssUrl = "https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko"
 
     fun execute() {
         CoroutineScope(Dispatchers.IO).launch {
