@@ -1,29 +1,29 @@
 package com.foreknowledge.rssnewsreader.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
-import androidx.databinding.DataBindingUtil
-import com.foreknowledge.rssnewsreader.NewsApplication
+import com.foreknowledge.rssnewsreader.NewsApplication.Companion.mainViewModel
 import com.foreknowledge.rssnewsreader.R
+import com.foreknowledge.rssnewsreader.base.BaseActivity
 import com.foreknowledge.rssnewsreader.databinding.ActivityDetailBinding
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_detail) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
 
-        val id = intent.getIntExtra("id", 0)
-        val news = NewsApplication.newsList[id]
-        binding.news = news
+        val id = intent.getIntExtra("id", -1)
+        val news = mainViewModel.newsList.value?.getOrNull(id)
 
-        with(binding.webView) {
-            //settings.javaScriptEnabled = true
-            webChromeClient = WebChromeClient()
-            webViewClient = WebViewClient()
-            loadUrl(news.link)
+        binding.apply {
+            this.news = news
+            this.webView.apply {
+                //settings.javaScriptEnabled = true
+                webChromeClient = WebChromeClient()
+                webViewClient = WebViewClient()
+                loadUrl(news?.link)
+            }
         }
     }
 }

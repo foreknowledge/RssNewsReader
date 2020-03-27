@@ -4,9 +4,10 @@ import android.content.Intent
 import android.util.Log
 import android.view.View
 import com.foreknowledge.rssnewsreader.ui.DetailActivity
+import com.foreknowledge.rssnewsreader.util.HtmlParser
+import com.foreknowledge.rssnewsreader.util.HtmlParser.getDescription
+import com.foreknowledge.rssnewsreader.util.HtmlParser.getImageUrl
 import com.foreknowledge.rssnewsreader.util.KeywordExtractor
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
 import java.lang.Exception
 
 data class News (
@@ -28,17 +29,15 @@ data class News (
 
     fun fill() {
         try {
-            val doc = Jsoup.connect(link).get()
-
-            description = doc.getDescription()?.trim()
-            imageUrl = doc.getImageUrl()
+            HtmlParser.parse(imageUrl).run {
+                description = getDescription()?.trim()
+                imageUrl = getImageUrl()
+            }
 
             keywords = description?.let {
                 KeywordExtractor.extract(it)
             }
-        } catch (e: Exception) { Log.d("test", e.message.toString()) }
+        }
+        catch (e: Exception) { Log.d("test", e.message.toString()) }
     }
-
-    private fun Document.getDescription() = select("meta[property=og:description]").getOrNull(0)?.attr("content")
-    private fun Document.getImageUrl() = select("meta[property=og:image]").getOrNull(0)?.attr("content")
 }

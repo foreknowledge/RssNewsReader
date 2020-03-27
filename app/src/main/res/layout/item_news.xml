@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/thumbnail_image"
-                    app:bindBitmapImage="@{news.imageUrl}" />
+                    app:bind_bitmap_image="@{news.imageUrl}" />
 
             </androidx.cardview.widget.CardView>
 
@@ -79,18 +79,18 @@
                     android:visibility="@{news.keywords != null ? View.VISIBLE : View.INVISIBLE}" >
 
                     <TextView
-                        android:text="@{news.keywords[0]}"
                         android:background="@drawable/dr_keyword_bg"
+                        app:set_keyword="@{news.keywords[0]}"
                         style="@style/KeywordStyle" />
 
                     <TextView
-                        android:text="@{news.keywords[1]}"
                         android:background="@drawable/dr_keyword_bg"
+                        app:set_keyword="@{news.keywords[1]}"
                         style="@style/KeywordStyle" />
 
                     <TextView
-                        android:text="@{news.keywords[2]}"
                         android:background="@drawable/dr_keyword_bg"
+                        app:set_keyword="@{news.keywords[2]}"
                         style="@style/KeywordStyle" />
 
                 </LinearLayout>
