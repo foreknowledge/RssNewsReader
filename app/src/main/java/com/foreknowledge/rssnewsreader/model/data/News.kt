@@ -29,7 +29,7 @@ data class News (
 
     fun fill() {
         try {
-            HtmlParser.parse(imageUrl).run {
+            HtmlParser.parse(link).run {
                 description = getDescription()?.trim()
                 imageUrl = getImageUrl()
             }

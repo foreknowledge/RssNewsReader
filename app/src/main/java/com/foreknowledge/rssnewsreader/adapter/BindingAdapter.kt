@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.foreknowledge.rssnewsreader.model.data.News
 
 @BindingAdapter("bind_bitmap_image")
 fun ImageView.bindBitmapImage(url: String?) {
@@ -14,8 +13,8 @@ fun ImageView.bindBitmapImage(url: String?) {
 }
 
 @BindingAdapter("bind_adapter")
-fun RecyclerView.bindAdapter(list: List<News>) {
-    adapter = NewsRecyclerAdapter(list).apply { setHasStableIds(true) }
+fun RecyclerView.bindAdapter(newsAdapter: NewsRecyclerAdapter) {
+    adapter = newsAdapter
 }
 
 @BindingAdapter("set_keyword")

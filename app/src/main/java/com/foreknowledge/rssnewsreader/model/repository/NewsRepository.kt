@@ -1,6 +1,7 @@
 package com.foreknowledge.rssnewsreader.model.repository
 
 import android.util.Log
+import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
 import com.foreknowledge.rssnewsreader.model.data.News
 import com.foreknowledge.rssnewsreader.util.RssParser
 import kotlinx.coroutines.CoroutineScope
@@ -9,6 +10,7 @@ import kotlinx.coroutines.launch
 
 object NewsRepository {
     fun parseNewsList(
+        adapter: NewsRecyclerAdapter?,
         endLoading:() -> Unit
     ) : List<News> {
         val newsList = mutableListOf<News>()
@@ -24,6 +26,7 @@ object NewsRepository {
                 for (news in newsList)
                     launch {
                         news.fill()
+                        adapter?.updateItems(newsList)
                     }
             } catch (e: Exception) {
                 Log.d("test", e.message.toString())

@@ -3,6 +3,7 @@ package com.foreknowledge.rssnewsreader.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
 import com.foreknowledge.rssnewsreader.model.data.News
 import com.foreknowledge.rssnewsreader.model.repository.NewsRepository
 
@@ -11,6 +12,7 @@ class MainViewModel(
 ) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     private val _newsList = MutableLiveData<List<News>>()
+    var adapter: NewsRecyclerAdapter? = null
 
     val isLoading: LiveData<Boolean>
         get() = _isLoading
@@ -26,6 +28,7 @@ class MainViewModel(
     private fun initNewsList() {
         _newsList.postValue(
             repository.parseNewsList(
+                adapter = adapter,
                 endLoading = { _isLoading.postValue(false) }
             )
         )
