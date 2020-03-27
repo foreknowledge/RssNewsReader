@@ -16,9 +16,9 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_det
         val id = intent.getIntExtra("id", -1)
         val news = mainViewModel.newsList.value?.getOrNull(id)
 
-        binding.apply {
+        binding.run {
             this.news = news
-            this.webView.apply {
+            this.webView.run {
                 //settings.javaScriptEnabled = true
                 webChromeClient = WebChromeClient()
                 webViewClient = WebViewClient()
