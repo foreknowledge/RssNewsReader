@@ -26,7 +26,7 @@ class RssParser {
                     launch {
                         news.fill()
                         launch(Dispatchers.Main) {
-                            NewsApplication.mainRecyclerAdapter?.notifyDataSetChanged()
+                            NewsApplication.newsAdapter?.notifyDataSetChanged()
                         }
                     }
             } catch (e: Exception) {

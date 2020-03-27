@@ -6,7 +6,7 @@ import com.foreknowledge.rssnewsreader.model.News
 
 class NewsApplication : Application() {
     companion object {
-        var newsList = mutableListOf<News>()
-        var mainRecyclerAdapter: NewsRecyclerAdapter? = null
+        val newsList = mutableListOf<News>()
+        var newsAdapter : NewsRecyclerAdapter? = null
     }
 }
