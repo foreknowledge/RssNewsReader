@@ -12,8 +12,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.apply {
-            mainViewModel.apply {
+        binding.run {
+            mainViewModel.run {
                 if (newsList.value != null)
                     adapter = NewsRecyclerAdapter(newsList.value!!)
                 viewModel = this
