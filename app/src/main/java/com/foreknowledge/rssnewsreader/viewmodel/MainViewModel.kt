@@ -19,15 +19,14 @@ class MainViewModel(
         get() = _newsList
 
     init {
+        _isLoading.postValue(true)
         initNewsList()
     }
 
     private fun initNewsList() {
         _newsList.postValue(
             repository.parseNewsList(
-                parseStart = { _isLoading.postValue(true) },
-                parseSuccess = { _isLoading.postValue(false) },
-                parseFail = { _isLoading.postValue(true) }
+                endLoading = { _isLoading.postValue(false) }
             )
         )
     }

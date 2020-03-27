@@ -9,27 +9,17 @@ import kotlinx.coroutines.launch
 
 object NewsRepository {
     fun parseNewsList(
-        parseStart:() -> Unit,
-        parseSuccess:() -> Unit,
-        parseFail:() -> Unit
+        endLoading:() -> Unit
     ) : List<News> {
-        run(parseStart)
         val newsList = mutableListOf<News>()
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val articles = RssParser.execute()
-
-                run(parseSuccess)
+                run(endLoading)
 
                 for ((i, article) in articles.withIndex())
-                    newsList.add(
-                        News(
-                            id = i,
-                            title = article.title,
-                            link = article.link
-                        )
-                    )
+                    newsList.add(News(id = i, title = article.title, link = article.link))
 
                 for (news in newsList)
                     launch {
@@ -37,7 +27,7 @@ object NewsRepository {
                     }
             } catch (e: Exception) {
                 Log.d("test", e.message.toString())
-                run(parseFail)
+                run(endLoading)
             }
         }
 
