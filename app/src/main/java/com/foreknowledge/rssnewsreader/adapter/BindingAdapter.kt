@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.foreknowledge.rssnewsreader.model.News
+import com.foreknowledge.rssnewsreader.model.data.News
 
 @BindingAdapter("bind_bitmap_image")
 fun ImageView.bindBitmapImage(url: String?) {

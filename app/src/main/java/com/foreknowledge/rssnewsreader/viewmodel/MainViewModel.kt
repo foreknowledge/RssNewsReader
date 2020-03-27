@@ -1,16 +1,14 @@
 package com.foreknowledge.rssnewsreader.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.foreknowledge.rssnewsreader.model.News
-import com.foreknowledge.rssnewsreader.util.RssParser
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.foreknowledge.rssnewsreader.model.data.News
+import com.foreknowledge.rssnewsreader.model.repository.NewsRepository
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    private val repository : NewsRepository
+) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     private val _newsList = MutableLiveData<List<News>>()
 
@@ -21,31 +19,16 @@ class MainViewModel : ViewModel() {
         get() = _newsList
 
     init {
-        initValues()
+        initNewsList()
     }
 
-    private fun initValues() {
-        _isLoading.postValue(true)
-        parseNewsList()
-    }
-
-    private fun parseNewsList() {
-        val newsList = mutableListOf<News>()
-        _newsList.value = newsList
-
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val articles = RssParser.execute()
-                _isLoading.postValue(false)
-
-                for ((i, article) in articles.withIndex())
-                    newsList.add(News(id = i, title = article.title, link = article.link))
-
-                for (news in newsList)
-                    launch {
-                        news.fill()
-                    }
-            } catch (e: Exception) { Log.d("test", e.message.toString()) }
-        }
+    private fun initNewsList() {
+        _newsList.postValue(
+            repository.parseNewsList(
+                parseStart = { _isLoading.postValue(true) },
+                parseSuccess = { _isLoading.postValue(false) },
+                parseFail = { _isLoading.postValue(true) }
+            )
+        )
     }
 }

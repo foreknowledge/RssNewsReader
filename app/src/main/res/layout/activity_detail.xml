@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="news"
-            type="com.foreknowledge.rssnewsreader.model.News" />
+            type="com.foreknowledge.rssnewsreader.model.data.News" />
     </data>
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package com.foreknowledge.rssnewsreader.model
+package com.foreknowledge.rssnewsreader.model.data
 
 import android.content.Intent
 import android.util.Log
