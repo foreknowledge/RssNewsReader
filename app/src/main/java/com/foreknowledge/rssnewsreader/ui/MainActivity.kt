@@ -1,24 +1,24 @@
 package com.foreknowledge.rssnewsreader.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
-import com.foreknowledge.rssnewsreader.NewsApplication
+import com.foreknowledge.rssnewsreader.NewsApplication.Companion.mainViewModel
 import com.foreknowledge.rssnewsreader.R
 import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
+import com.foreknowledge.rssnewsreader.base.BaseActivity
 import com.foreknowledge.rssnewsreader.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
-        with (NewsApplication) {
-            val newsAdapter = NewsRecyclerAdapter(newsList)
-            newsAdapter.setHasStableIds(true)
-            mainRecyclerAdapter = newsAdapter
-            binding.adapter = mainRecyclerAdapter
+        binding.apply {
+            mainViewModel.apply {
+                if (newsList.value != null)
+                    adapter = NewsRecyclerAdapter(newsList.value!!)
+                viewModel = this
+            }
+            lifecycleOwner = this@MainActivity
         }
 
     }
