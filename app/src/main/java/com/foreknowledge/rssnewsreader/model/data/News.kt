@@ -19,12 +19,12 @@ data class News (
     val link: String? = null
 ) {
     fun onClick(view: View) {
-        val context = view.context
+        view.context.run {
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("id", id)
 
-        val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra("id", id)
-
-        context.startActivity(intent)
+            startActivity(intent)
+        }
     }
 
     fun fill() {
