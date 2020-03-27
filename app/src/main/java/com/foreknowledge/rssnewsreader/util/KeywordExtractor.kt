@@ -17,5 +17,6 @@ object KeywordExtractor {
             .toList()
 
     private fun String.removeSpecialCharacter() =
-        this.replace("[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]".toRegex(), " ")
+        this.replace("\n", " ")
+            .replace("[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]".toRegex(), " ")
 }
