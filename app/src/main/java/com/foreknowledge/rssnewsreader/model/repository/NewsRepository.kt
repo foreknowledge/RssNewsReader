@@ -29,7 +29,7 @@ object NewsRepository {
                         adapter?.updateItems(newsList)
                     }
             } catch (e: Exception) {
-                Log.d("test", e.message.toString())
+                Log.d("NewsRepository::", e.message.toString())
                 run(endLoading)
             }
         }

@@ -38,6 +38,6 @@ data class News (
                 KeywordExtractor.extract(it)
             }
         }
-        catch (e: Exception) { Log.d("test", e.message.toString()) }
+        catch (e: Exception) { Log.d("News::", e.message.toString()) }
     }
 }

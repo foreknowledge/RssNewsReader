@@ -7,5 +7,6 @@ import com.foreknowledge.rssnewsreader.model.data.News
 class NewsHolder(private val binding: ItemNewsBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(news: News) {
         binding.news = news
+        binding.executePendingBindings()
     }
 }
