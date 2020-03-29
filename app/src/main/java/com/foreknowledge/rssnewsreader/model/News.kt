@@ -20,6 +20,8 @@ data class News (
     var keywords: List<String>? = null,
     val link: String? = null
 ) {
+    private val tag = javaClass.simpleName
+
     fun onClick(view: View) {
         view.context.run {
             val intent = Intent(this, DetailActivity::class.java).apply {
@@ -32,7 +34,7 @@ data class News (
         }
     }
 
-    fun fill() {
+    fun parseHtmlDataAndFill() {
         try {
             HtmlParser.parse(link).run {
                 description = getDescription()?.trim()
@@ -44,7 +46,7 @@ data class News (
             }
         }
         catch (e: Exception) {
-            Log.d(javaClass.simpleName, e.message.toString())
+            Log.d(tag, e.message.toString())
         }
     }
 }

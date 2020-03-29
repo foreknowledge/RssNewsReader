@@ -9,7 +9,7 @@ import com.foreknowledge.rssnewsreader.holder.NewsHolder
 import com.foreknowledge.rssnewsreader.model.News
 import com.foreknowledge.rssnewsreader.util.NewsDiffUtil
 
-class NewsRecyclerAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsHolder>() {
+class NewsRecyclerAdapter(private var newsList: MutableList<News> = mutableListOf()) : RecyclerView.Adapter<NewsHolder>() {
 
     override fun getItemCount(): Int = newsList.size
 
@@ -19,11 +19,16 @@ class NewsRecyclerAdapter(private var newsList: List<News>) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: NewsHolder, position: Int) =
         holder.bind(newsList[position])
 
+    fun setNewsItem(newList: MutableList<News>) {
+        newsList = newList
+    }
+
     fun updateItems(newList: List<News>) {
         val diffUtil = NewsDiffUtil(newsList, newList)
         val diffResult = DiffUtil.calculateDiff(diffUtil, true)
 
-        newsList = newList
+        newsList.clear()
+        newsList.addAll(newList)
 
         diffResult.dispatchUpdatesTo(this)
     }

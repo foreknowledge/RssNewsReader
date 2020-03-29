@@ -10,31 +10,34 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 object RssParser {
+    private val tag = javaClass.simpleName
 
     fun execute(
-        newsList: MutableList<News>,
         adapter: NewsRecyclerAdapter,
         endLoading: () -> Unit
     ) =
         CoroutineScope(Dispatchers.IO).launch {
+            val newsList = mutableListOf<News>()
             try {
                 val articles = Parser().getChannel(RSS_URL).articles
 
                 for (article in articles)
                     newsList.add(News(title = article.title, link = article.link))
 
-                for (news in newsList)
+                for (news in newsList) {
+                    Log.d(tag, "news title = ${news.title}")
                     launch {
-                        news.fill()
-                        CoroutineScope(Dispatchers.Main).launch{
+                        news.parseHtmlDataAndFill()
+                        CoroutineScope(Dispatchers.Main).launch {
                             run(endLoading)
-                            //adapter.updateItems(newsList)
+                            adapter.setNewsItem(newsList)
                             adapter.notifyDataSetChanged()
                         }
                     }
+                }
             } catch (e: Exception) {
-                Log.d(javaClass.simpleName, e.message.toString())
                 run(endLoading)
+                Log.d(tag, e.message.toString())
             }
         }
 }

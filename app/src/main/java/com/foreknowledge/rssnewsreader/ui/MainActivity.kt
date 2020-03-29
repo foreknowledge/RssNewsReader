@@ -19,7 +19,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             lifecycleOwner = this@MainActivity
 
             swipeRefresh.setOnRefreshListener {
-                mainViewModel.refreshList {
+                mainViewModel.initOrRefreshAdapter {
                     swipeRefresh.isRefreshing = false
                 }
             }
