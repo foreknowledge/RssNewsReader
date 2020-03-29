@@ -40,4 +40,9 @@ data class News (
         }
         catch (e: Exception) { Log.d("News::", e.message.toString()) }
     }
+
+    override fun hashCode(): Int = this.hashCode()
+
+    override fun equals(other: Any?): Boolean =
+        this.hashCode() == other.hashCode()
 }
