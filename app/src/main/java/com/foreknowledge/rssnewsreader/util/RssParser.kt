@@ -4,6 +4,7 @@ import android.util.Log
 import com.foreknowledge.rssnewsreader.RSS_URL
 import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
 import com.foreknowledge.rssnewsreader.model.News
+import com.foreknowledge.rssnewsreader.util.HtmlParser.parseHtmlDataAndFill
 import com.prof.rssparser.Parser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,26 +16,25 @@ object RssParser {
     fun execute(
         adapter: NewsRecyclerAdapter,
         endLoading: () -> Unit
-    ) =
-        CoroutineScope(Dispatchers.IO).launch {
+    ) = CoroutineScope(Dispatchers.IO).launch {
             val newsList = mutableListOf<News>()
             try {
                 val articles = Parser().getChannel(RSS_URL).articles
 
-                for (article in articles)
-                    newsList.add(News(title = article.title, link = article.link))
+                for ((i, article) in articles.withIndex())
+                    newsList.add(News(id = i,title = article.title, link = article.link))
 
-                for (news in newsList) {
-                    Log.d(tag, "news title = ${news.title}")
+                adapter.setNewsItem(newsList)
+
+                for (news in newsList)
                     launch {
                         news.parseHtmlDataAndFill()
                         CoroutineScope(Dispatchers.Main).launch {
                             run(endLoading)
-                            adapter.setNewsItem(newsList)
-                            adapter.notifyDataSetChanged()
+                            adapter.notifyItemChanged(news.id)
                         }
                     }
-                }
+
             } catch (e: Exception) {
                 run(endLoading)
                 Log.d(tag, e.message.toString())
