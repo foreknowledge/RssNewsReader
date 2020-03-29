@@ -17,6 +17,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.run {
             viewModel = mainViewModel
             lifecycleOwner = this@MainActivity
+
+            swipeRefresh.setOnRefreshListener {
+                mainViewModel.refreshList {
+                    swipeRefresh.isRefreshing = false
+                }
+            }
         }
 
     }
