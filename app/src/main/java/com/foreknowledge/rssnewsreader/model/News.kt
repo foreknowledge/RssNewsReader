@@ -1,8 +1,11 @@
-package com.foreknowledge.rssnewsreader.model.data
+package com.foreknowledge.rssnewsreader.model
 
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import com.foreknowledge.rssnewsreader.EXTRA_KEYWORDS
+import com.foreknowledge.rssnewsreader.EXTRA_LINK
+import com.foreknowledge.rssnewsreader.EXTRA_TITLE
 import com.foreknowledge.rssnewsreader.ui.DetailActivity
 import com.foreknowledge.rssnewsreader.util.HtmlParser
 import com.foreknowledge.rssnewsreader.util.HtmlParser.getDescription
@@ -11,7 +14,6 @@ import com.foreknowledge.rssnewsreader.util.KeywordExtractor
 import java.lang.Exception
 
 data class News (
-    val id: Int,
     val title: String? = null,
     var description: String? = null,
     var imageUrl: String? = null,
@@ -20,8 +22,11 @@ data class News (
 ) {
     fun onClick(view: View) {
         view.context.run {
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("id", id)
+            val intent = Intent(this, DetailActivity::class.java).apply {
+                putExtra(EXTRA_TITLE, title)
+                putExtra(EXTRA_LINK, link)
+                putExtra(EXTRA_KEYWORDS, keywords?.joinToString(","))
+            }
 
             startActivity(intent)
         }
@@ -38,11 +43,8 @@ data class News (
                 KeywordExtractor.extract(it)
             }
         }
-        catch (e: Exception) { Log.d("News::", e.message.toString()) }
+        catch (e: Exception) {
+            Log.d(javaClass.simpleName, e.message.toString())
+        }
     }
-
-    override fun hashCode(): Int = this.hashCode()
-
-    override fun equals(other: Any?): Boolean =
-        this.hashCode() == other.hashCode()
 }

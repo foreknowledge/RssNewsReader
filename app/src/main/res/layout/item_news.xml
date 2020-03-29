@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="news"
-            type="com.foreknowledge.rssnewsreader.model.data.News" />
+            type="com.foreknowledge.rssnewsreader.model.News" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/thumbnail_image"
-                    app:bind_bitmap_image="@{news.imageUrl}" />
+                    bind_bitmap_image="@{news.imageUrl}" />
 
             </androidx.cardview.widget.CardView>
 
@@ -80,17 +80,17 @@
 
                     <TextView
                         android:background="@drawable/dr_keyword_bg"
-                        app:set_keyword="@{news.keywords[0]}"
+                        set_keyword="@{news.keywords[0]}"
                         style="@style/KeywordStyle" />
 
                     <TextView
                         android:background="@drawable/dr_keyword_bg"
-                        app:set_keyword="@{news.keywords[1]}"
+                        set_keyword="@{news.keywords[1]}"
                         style="@style/KeywordStyle" />
 
                     <TextView
                         android:background="@drawable/dr_keyword_bg"
-                        app:set_keyword="@{news.keywords[2]}"
+                        set_keyword="@{news.keywords[2]}"
                         style="@style/KeywordStyle" />
 
                 </LinearLayout>

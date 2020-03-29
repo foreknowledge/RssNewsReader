@@ -1,9 +1,10 @@
 package com.foreknowledge.rssnewsreader.util
 
+import com.foreknowledge.rssnewsreader.RSS_URL
 import com.prof.rssparser.Parser
 
 object RssParser {
-    private const val rssUrl = "https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko"
+    private
 
-    suspend fun execute() = Parser().getChannel(rssUrl).articles
+    suspend fun execute() = Parser().getChannel(RSS_URL).articles
 }
