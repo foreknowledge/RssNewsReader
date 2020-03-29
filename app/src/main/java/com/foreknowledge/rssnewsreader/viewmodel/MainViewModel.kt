@@ -4,33 +4,30 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
-import com.foreknowledge.rssnewsreader.model.data.News
-import com.foreknowledge.rssnewsreader.model.repository.NewsRepository
+import com.foreknowledge.rssnewsreader.model.News
+import com.foreknowledge.rssnewsreader.util.RssParser
 
-class MainViewModel(
-    private val repository : NewsRepository
-) : ViewModel() {
+class MainViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
-    private val _newsList = MutableLiveData<List<News>>()
-    var adapter: NewsRecyclerAdapter? = null
+    lateinit var adapter: NewsRecyclerAdapter
 
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    val newsList: LiveData<List<News>>
-        get() = _newsList
-
     init {
         _isLoading.postValue(true)
-        initNewsList()
+        initAdapter()
     }
 
-    private fun initNewsList() {
-        _newsList.postValue(
-            repository.parseNewsList(
-                adapter = adapter,
-                endLoading = { _isLoading.postValue(false) }
-            )
-        )
+    private fun initAdapter() {
+        val newsList = mutableListOf<News>()
+        adapter = NewsRecyclerAdapter(newsList)
+
+        RssParser.execute(newsList, adapter) { _isLoading.postValue(false) }
+    }
+
+    fun refreshList(endLoading:() -> Unit) {
+        val newsList = mutableListOf<News>()
+        RssParser.execute(newsList, adapter) { run(endLoading) }
     }
 }
