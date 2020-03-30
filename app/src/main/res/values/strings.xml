@@ -10,4 +10,6 @@
     <string name="desc_ic_news">news icon</string>
     <string name="desc_ic_internet">internet icon</string>
     <string name="desc_ic_wifi">wifi icon</string>
+
+    <string name="error_fail_to_fetch">뉴스 정보를 가져올 수 없습니다 :( \n먼저 네트워크 연결을 확인해 주세요. \n네트워크 연결 중에도 오류가 발생한다면 문의를 남겨주세요.</string>
 </resources>

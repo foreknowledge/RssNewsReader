@@ -13,7 +13,8 @@ object RssParser {
 
     fun execute(
         adapter: NewsRecyclerAdapter,
-        endLoading: () -> Unit
+        endLoading: () -> Unit,
+        showFailMsg: () -> Unit
     ) = CoroutineScope(Dispatchers.IO).launch {
             val newsList = mutableListOf<News>()
             try {
@@ -42,6 +43,7 @@ object RssParser {
 
             } catch (e: Exception) {
                 run(endLoading)
+                run(showFailMsg)
                 Log.d(tag, e.message.toString())
             }
         }

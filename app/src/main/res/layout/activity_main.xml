@@ -28,6 +28,7 @@
                 android:id="@+id/rv_news"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="@{viewModel.showFailMsg ? View.INVISIBLE : View.VISIBLE}"
                 tools:listitem="@layout/item_news"
                 app:bind_adapter="@{viewModel.adapter}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -37,11 +38,25 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/error_fail_to_fetch"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:lineSpacingExtra="5dp"
+            android:visibility="@{viewModel.showFailMsg ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"  />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
