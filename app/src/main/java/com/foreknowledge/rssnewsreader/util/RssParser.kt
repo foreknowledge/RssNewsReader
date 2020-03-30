@@ -6,9 +6,7 @@ import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
 import com.foreknowledge.rssnewsreader.model.News
 import com.foreknowledge.rssnewsreader.util.HtmlParser.parseHtmlDataAndFill
 import com.prof.rssparser.Parser
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 object RssParser {
     private val tag = javaClass.simpleName
@@ -26,14 +24,21 @@ object RssParser {
 
                 adapter.setNewsItem(newsList)
 
+                val jobs = mutableListOf<Job>()
                 for (news in newsList)
-                    launch {
-                        news.parseHtmlDataAndFill()
-                        CoroutineScope(Dispatchers.Main).launch {
-                            run(endLoading)
-                            adapter.notifyItemChanged(news.id)
+                    jobs.add(
+                        launch {
+                            news.parseHtmlDataAndFill()
+                            CoroutineScope(Dispatchers.Main).launch { adapter.notifyItemChanged(news.id)}
                         }
-                    }
+                    )
+
+                for (job in jobs)
+                    job.join()
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    run(endLoading)
+                }
 
             } catch (e: Exception) {
                 run(endLoading)

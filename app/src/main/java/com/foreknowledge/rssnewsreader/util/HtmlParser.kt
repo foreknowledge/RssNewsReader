@@ -14,7 +14,7 @@ object HtmlParser {
 
         try {
             parse(link).run {
-                description = getDescription()?.trim()
+                description = getDescription()?.refine()
                 imageUrl = getImageUrl()
             }
 
@@ -29,4 +29,9 @@ object HtmlParser {
     private fun parse(url: String?): Document = Jsoup.connect(url).get()
     private fun Document.getDescription() = select("meta[property=og:description]").getOrNull(0)?.attr("content")
     private fun Document.getImageUrl() = select("meta[property=og:image]").getOrNull(0)?.attr("content")
+
+    private fun String.refine() =
+        this.trim()
+            .replace("\n", " ")
+            .replace("\t", " ")
 }

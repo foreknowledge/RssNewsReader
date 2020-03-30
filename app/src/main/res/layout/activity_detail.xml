@@ -59,6 +59,14 @@
 
         </HorizontalScrollView>
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="1"
+            android:max="100"
+            style="?android:attr/progressBarStyleHorizontal" />
+
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
