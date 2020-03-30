@@ -8,24 +8,24 @@ import com.foreknowledge.rssnewsreader.util.RssParser
 
 class MainViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
-    private val _showFailMsg = MutableLiveData<Boolean>()
+    private val _isFailToFetch = MutableLiveData<Boolean>()
     var adapter: NewsRecyclerAdapter
 
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    val showFailMsg: LiveData<Boolean>
-        get() = _showFailMsg
+    val isFailToFetch: LiveData<Boolean>
+        get() = _isFailToFetch
 
     init {
         _isLoading.postValue(true)
-        _showFailMsg.postValue(false)
+        _isFailToFetch.postValue(false)
         adapter = NewsRecyclerAdapter()
         initOrRefreshAdapter { _isLoading.postValue(false) }
     }
 
     fun initOrRefreshAdapter(endLoading:() -> Unit) {
-        _showFailMsg.postValue(false)
-        RssParser.execute(adapter, endLoading = endLoading, showFailMsg = { _showFailMsg.postValue(true)})
+        _isFailToFetch.postValue(false)
+        RssParser.execute(adapter, endLoading = endLoading, showFailMsg = { _isFailToFetch.postValue(true)})
     }
 }

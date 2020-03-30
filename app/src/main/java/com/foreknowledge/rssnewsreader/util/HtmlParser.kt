@@ -21,6 +21,7 @@ object HtmlParser {
             keywords = description?.let {
                 KeywordExtractor.extract(it)
             }
+
         } catch (e: Exception) {
             Log.d(tag, e.message.toString())
         }

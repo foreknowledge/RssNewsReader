@@ -3,9 +3,7 @@ package com.foreknowledge.rssnewsreader.model
 import android.content.Intent
 import android.os.SystemClock
 import android.view.View
-import com.foreknowledge.rssnewsreader.EXTRA_KEYWORDS
-import com.foreknowledge.rssnewsreader.EXTRA_LINK
-import com.foreknowledge.rssnewsreader.EXTRA_TITLE
+import com.foreknowledge.rssnewsreader.EXTRA_NEWS_ID
 import com.foreknowledge.rssnewsreader.MIN_CLICK_INTERVAL
 import com.foreknowledge.rssnewsreader.ui.DetailActivity
 
@@ -26,9 +24,7 @@ data class News (
 
         view.context.run {
             val intent = Intent(this, DetailActivity::class.java).apply {
-                putExtra(EXTRA_TITLE, title)
-                putExtra(EXTRA_LINK, link)
-                putExtra(EXTRA_KEYWORDS, keywords?.joinToString(","))
+                putExtra(EXTRA_NEWS_ID, id)
             }
 
             startActivity(intent)

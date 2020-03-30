@@ -3,6 +3,7 @@ package com.foreknowledge.rssnewsreader.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.foreknowledge.rssnewsreader.GlobalApplication
 import com.foreknowledge.rssnewsreader.databinding.ItemNewsBinding
 import com.foreknowledge.rssnewsreader.holder.NewsHolder
 import com.foreknowledge.rssnewsreader.model.News
@@ -19,5 +20,6 @@ class NewsRecyclerAdapter(private var newsList: List<News> = listOf()) : Recycle
 
     fun setNewsItem(newList: List<News>) {
         newsList = newList
+        GlobalApplication.newsList = newList
     }
 }

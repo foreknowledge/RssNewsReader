@@ -5,10 +5,8 @@ import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.foreknowledge.rssnewsreader.EXTRA_KEYWORDS
-import com.foreknowledge.rssnewsreader.EXTRA_LINK
-import com.foreknowledge.rssnewsreader.EXTRA_TITLE
-import com.foreknowledge.rssnewsreader.R
+import com.foreknowledge.rssnewsreader.*
+import com.foreknowledge.rssnewsreader.GlobalApplication.Companion.newsList
 import com.foreknowledge.rssnewsreader.base.BaseActivity
 import com.foreknowledge.rssnewsreader.databinding.ActivityDetailBinding
 
@@ -17,8 +15,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_det
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.title = intent.getStringExtra(EXTRA_TITLE)
-        binding.keywords = intent.getStringExtra(EXTRA_KEYWORDS)?.split(",")
+        val newsId = intent.getIntExtra(EXTRA_NEWS_ID, -1)
+        binding.news = newsList.getOrNull(newsId)
         binding.webView.run {
             //settings.javaScriptEnabled = true
             webChromeClient = object: WebChromeClient() {
@@ -33,7 +31,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_det
                     binding.progressBar.visibility = View.GONE
                 }
             }
-            loadUrl(intent.getStringExtra(EXTRA_LINK))
+            loadUrl(binding.news?.link)
         }
     }
 
