@@ -1,5 +1,6 @@
 package com.foreknowledge.rssnewsreader.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebChromeClient
@@ -12,13 +13,14 @@ import com.foreknowledge.rssnewsreader.databinding.ActivityDetailBinding
 
 class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_detail) {
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val newsId = intent.getIntExtra(EXTRA_NEWS_ID, -1)
         binding.news = newsList.getOrNull(newsId)
         binding.webView.run {
-            //settings.javaScriptEnabled = true
+            settings.javaScriptEnabled = true
             webChromeClient = object: WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     super.onProgressChanged(view, newProgress)

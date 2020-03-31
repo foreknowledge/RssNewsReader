@@ -39,6 +39,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/thumbnail_image"
+                    android:background="@color/colorImageBG"
                     bind_bitmap_image="@{news.imageUrl}" />
 
             </androidx.cardview.widget.CardView>

@@ -7,4 +7,5 @@
     <color name="colorKeywordBack">#E2B944</color>
 
     <color name="colorGrayLight">#D0CECE</color>
+    <color name="colorImageBG">#F2F2F2</color>
 </resources>
