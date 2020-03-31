@@ -7,6 +7,9 @@ import com.foreknowledge.rssnewsreader.base.BaseActivity
 import com.foreknowledge.rssnewsreader.databinding.ActivityMainBinding
 import com.foreknowledge.rssnewsreader.viewmodel.MainViewModel
 
+/*
+ *
+ */
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val mainViewModel = ViewModelProvider.AndroidViewModelFactory(application).create(MainViewModel::class.java)

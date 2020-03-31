@@ -37,6 +37,9 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    // circle imageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     // rss parser
     implementation 'com.prof.rssparser:rssparser:2.1.1'
 
