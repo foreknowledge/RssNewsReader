@@ -8,6 +8,17 @@ import com.foreknowledge.rssnewsreader.util.HtmlParser.parseHtmlDataAndFill
 import com.prof.rssparser.Parser
 import kotlinx.coroutines.*
 
+/*
+ * Rss Parser 라이브러리 사용
+ * [출처] https://github.com/prof18/RSS-Parser
+ *
+ * OkHttp 라이브러리 사용
+ * [출처] https://github.com/square/okhttp
+ *
+ * Coroutine 라이브러리 사용
+ * [출처] https://github.com/Kotlin/kotlinx.coroutines
+ */
+
 object RssParser {
     private val tag = javaClass.simpleName
 

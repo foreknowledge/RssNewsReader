@@ -8,6 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.foreknowledge.rssnewsreader.R
 
+/*
+ * Glide 라이브러리 사용
+ * [출처] https://github.com/bumptech/glide
+ */
+
 @BindingAdapter("bind_bitmap_image")
 fun ImageView.bindBitmapImage(url: String?) {
     Glide.with(context)

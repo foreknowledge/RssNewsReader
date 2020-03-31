@@ -29,7 +29,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" >
-                
+
+                <!--
+                CircleImageView 라이브러리 사용
+                [출처] https://github.com/hdodenhof/CircleImageView
+                -->
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

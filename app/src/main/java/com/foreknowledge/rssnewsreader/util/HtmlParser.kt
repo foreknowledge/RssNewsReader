@@ -6,6 +6,11 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.lang.Exception
 
+/*
+ * Jsoup 라이브러리 사용
+ * [출처] https://github.com/jhy/jsoup/
+ */
+
 object HtmlParser {
     private val tag = javaClass.simpleName
 
