@@ -5,8 +5,8 @@
     <data>
         <import type="android.view.View" />
         <variable
-            name="news"
-            type="com.foreknowledge.rssnewsreader.model.News" />
+            name="item"
+            type="com.foreknowledge.rssnewsreader.model.data.News" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@android:color/white"
-            android:onClick="@{news::onClick}" >
+            android:onClick="@{item::onClick}" >
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/thumbnail_image"
                     android:background="@color/colorImageBG"
-                    app:bind_url_image="@{news.imageUrl}" />
+                    app:bind_url_image="@{item.imageUrl}" />
 
             </androidx.cardview.widget.CardView>
 
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="@{news.title}"
+                    android:text="@{item.title}"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
@@ -70,28 +70,28 @@
                     android:layout_marginBottom="3dp"
                     android:maxLines="2"
                     android:ellipsize="end"
-                    android:text="@{news.description}"
+                    android:text="@{item.description}"
                     android:textSize="15sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:visibility="@{news.keywords != null ? View.VISIBLE : View.INVISIBLE}" >
+                    android:visibility="@{item.keywords != null ? View.VISIBLE : View.INVISIBLE}" >
 
                     <TextView
                         android:background="@drawable/dr_keyword_bg"
-                        app:set_keyword="@{news.keywords[0]}"
+                        app:set_keyword="@{item.keywords[0]}"
                         style="@style/KeywordStyle" />
 
                     <TextView
                         android:background="@drawable/dr_keyword_bg"
-                        app:set_keyword="@{news.keywords[1]}"
+                        app:set_keyword="@{item.keywords[1]}"
                         style="@style/KeywordStyle" />
 
                     <TextView
                         android:background="@drawable/dr_keyword_bg"
-                        app:set_keyword="@{news.keywords[2]}"
+                        app:set_keyword="@{item.keywords[2]}"
                         style="@style/KeywordStyle" />
 
                 </LinearLayout>

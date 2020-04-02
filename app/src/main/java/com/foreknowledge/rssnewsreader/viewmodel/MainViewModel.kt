@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
-import com.foreknowledge.rssnewsreader.util.RssParser
+import com.foreknowledge.rssnewsreader.model.repository.NewsRepository
 
-class MainViewModel : ViewModel() {
-    private val _isLoading = MutableLiveData<Boolean>()
-    private val _isFailToFetch = MutableLiveData<Boolean>()
-    var adapter: NewsRecyclerAdapter
+class MainViewModel(
+    private val repository: NewsRepository
+) : ViewModel() {
+    private val _isLoading = MutableLiveData(true)
+    private val _isFailToFetch = MutableLiveData(false)
+    var newsAdapter = NewsRecyclerAdapter()
 
     val isLoading: LiveData<Boolean>
         get() = _isLoading
@@ -18,14 +20,15 @@ class MainViewModel : ViewModel() {
         get() = _isFailToFetch
 
     init {
-        _isLoading.postValue(true)
-        _isFailToFetch.postValue(false)
-        adapter = NewsRecyclerAdapter()
         initOrRefreshAdapter { _isLoading.postValue(false) }
     }
 
     fun initOrRefreshAdapter(endLoading:() -> Unit) {
         _isFailToFetch.postValue(false)
-        RssParser.execute(adapter, endLoading = endLoading, showFailMsg = { _isFailToFetch.postValue(true)})
+        repository.setAdapter(
+            adapter = newsAdapter,
+            endLoading = endLoading,
+            showFailMessage = { _isFailToFetch.postValue(true)}
+        )
     }
 }

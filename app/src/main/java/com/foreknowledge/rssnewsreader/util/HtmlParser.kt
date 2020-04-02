@@ -1,7 +1,7 @@
 package com.foreknowledge.rssnewsreader.util
 
 import android.util.Log
-import com.foreknowledge.rssnewsreader.model.News
+import com.foreknowledge.rssnewsreader.model.data.News
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.lang.Exception
