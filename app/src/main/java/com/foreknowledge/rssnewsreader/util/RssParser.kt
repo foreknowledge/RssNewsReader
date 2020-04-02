@@ -3,7 +3,7 @@ package com.foreknowledge.rssnewsreader.util
 import android.util.Log
 import com.foreknowledge.rssnewsreader.RSS_URL
 import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
-import com.foreknowledge.rssnewsreader.model.News
+import com.foreknowledge.rssnewsreader.model.data.News
 import com.foreknowledge.rssnewsreader.util.HtmlParser.parseHtmlDataAndFill
 import com.prof.rssparser.Parser
 import kotlinx.coroutines.*
@@ -26,22 +26,30 @@ object RssParser {
         adapter: NewsRecyclerAdapter,
         endLoading: () -> Unit,
         showFailMsg: () -> Unit
-    ) = CoroutineScope(Dispatchers.IO).launch {
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
             val newsList = mutableListOf<News>()
             try {
                 val articles = Parser().getChannel(RSS_URL).articles
 
-                for ((i, article) in articles.withIndex())
-                    newsList.add(News(id = i,title = article.title, link = article.link))
-
-                adapter.setNewsItem(newsList)
+                for ((i, article) in articles.withIndex()) {
+                    Log.d("tag", "title = ${article.title}")
+                    newsList.add(
+                        News(
+                            id = i,
+                            title = article.title,
+                            link = article.link
+                        )
+                    )
+                }
+                adapter.updateItems(newsList)
 
                 val jobs = mutableListOf<Job>()
                 for (news in newsList)
                     jobs.add(
                         launch {
                             news.parseHtmlDataAndFill()
-                            CoroutineScope(Dispatchers.Main).launch { adapter.notifyItemChanged(news.id)}
+                            CoroutineScope(Dispatchers.Main).launch { adapter.notifyItemChanged(news.id) }
                         }
                     )
 
@@ -49,13 +57,14 @@ object RssParser {
                     job.join()
 
                 CoroutineScope(Dispatchers.Main).launch {
-                    run(endLoading)
+                    endLoading()
                 }
 
             } catch (e: Exception) {
-                run(endLoading)
-                run(showFailMsg)
+                endLoading()
+                showFailMsg()
                 Log.d(tag, e.message.toString())
             }
         }
+    }
 }

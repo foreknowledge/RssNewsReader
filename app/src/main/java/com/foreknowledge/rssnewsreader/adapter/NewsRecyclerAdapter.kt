@@ -1,25 +1,18 @@
 package com.foreknowledge.rssnewsreader.adapter
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.foreknowledge.rssnewsreader.GlobalApplication
+import com.foreknowledge.rssnewsreader.R
+import com.foreknowledge.rssnewsreader.base.BaseRecyclerAdapter
 import com.foreknowledge.rssnewsreader.databinding.ItemNewsBinding
-import com.foreknowledge.rssnewsreader.holder.NewsHolder
-import com.foreknowledge.rssnewsreader.model.News
+import com.foreknowledge.rssnewsreader.model.data.News
 
-class NewsRecyclerAdapter(private var newsList: List<News> = listOf()) : RecyclerView.Adapter<NewsHolder>() {
-
-    override fun getItemCount(): Int = newsList.size
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder =
-        NewsHolder(ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
-    override fun onBindViewHolder(holder: NewsHolder, position: Int) =
-        holder.bind(newsList[position])
-
-    fun setNewsItem(newList: List<News>) {
-        newsList = newList
-        GlobalApplication.newsList = newList
+class NewsRecyclerAdapter: BaseRecyclerAdapter<ItemNewsBinding, News>(
+    R.layout.item_news
+) {
+    override fun updateItems(newItems: List<News>?) {
+        if (newItems != null) {
+            items = newItems
+            GlobalApplication.newsList = newItems
+        }
     }
 }

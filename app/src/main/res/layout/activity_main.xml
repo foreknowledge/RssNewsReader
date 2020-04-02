@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:visibility="@{viewModel.isFailToFetch() ? View.INVISIBLE : View.VISIBLE}"
                 tools:listitem="@layout/item_news"
-                app:bind_adapter="@{viewModel.adapter}"
+                app:bind_adapter="@{viewModel.newsAdapter}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
