@@ -40,7 +40,7 @@
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/thumbnail_image"
                     android:background="@color/colorImageBG"
-                    bind_bitmap_image="@{news.imageUrl}" />
+                    app:bind_url_image="@{news.imageUrl}" />
 
             </androidx.cardview.widget.CardView>
 
@@ -81,17 +81,17 @@
 
                     <TextView
                         android:background="@drawable/dr_keyword_bg"
-                        set_keyword="@{news.keywords[0]}"
+                        app:set_keyword="@{news.keywords[0]}"
                         style="@style/KeywordStyle" />
 
                     <TextView
                         android:background="@drawable/dr_keyword_bg"
-                        set_keyword="@{news.keywords[1]}"
+                        app:set_keyword="@{news.keywords[1]}"
                         style="@style/KeywordStyle" />
 
                     <TextView
                         android:background="@drawable/dr_keyword_bg"
-                        set_keyword="@{news.keywords[2]}"
+                        app:set_keyword="@{news.keywords[2]}"
                         style="@style/KeywordStyle" />
 
                 </LinearLayout>

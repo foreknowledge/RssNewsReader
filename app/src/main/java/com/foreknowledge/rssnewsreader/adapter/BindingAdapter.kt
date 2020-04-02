@@ -13,8 +13,8 @@ import com.foreknowledge.rssnewsreader.R
  * [출처] https://github.com/bumptech/glide
  */
 
-@BindingAdapter("bind_bitmap_image")
-fun ImageView.bindBitmapImage(url: String?) {
+@BindingAdapter("bind_url_image")
+fun ImageView.bindUrlImage(url: String?) {
     Glide.with(context)
         .load(url)
         .error(R.drawable.no_image)

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View" />
@@ -41,19 +42,19 @@
                 <TextView
                     android:textSize="14sp"
                     android:background="@drawable/dr_keyword_bg"
-                    set_keyword="@{news.keywords[0]}"
+                    app:set_keyword="@{news.keywords[0]}"
                     style="@style/KeywordStyle" />
 
                 <TextView
                     android:textSize="14sp"
                     android:background="@drawable/dr_keyword_bg"
-                    set_keyword="@{news.keywords[1]}"
+                    app:set_keyword="@{news.keywords[1]}"
                     style="@style/KeywordStyle" />
 
                 <TextView
                     android:textSize="14sp"
                     android:background="@drawable/dr_keyword_bg"
-                    set_keyword="@{news.keywords[2]}"
+                    app:set_keyword="@{news.keywords[2]}"
                     style="@style/KeywordStyle" />
 
             </LinearLayout>
