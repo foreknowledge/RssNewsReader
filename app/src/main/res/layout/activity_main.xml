@@ -6,6 +6,9 @@
     <data>
         <import type="android.view.View" />
         <variable
+            name="newsAdapter"
+            type="com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter" />
+        <variable
             name="viewModel"
             type="com.foreknowledge.rssnewsreader.viewmodel.MainViewModel" />
     </data>
@@ -30,7 +33,7 @@
                 android:layout_height="match_parent"
                 android:visibility="@{viewModel.isFailToFetch() ? View.INVISIBLE : View.VISIBLE}"
                 tools:listitem="@layout/item_news"
-                app:bind_adapter="@{viewModel.newsAdapter}"
+                app:bind_adapter="@{newsAdapter}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

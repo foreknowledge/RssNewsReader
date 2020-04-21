@@ -1,8 +1,8 @@
 package com.foreknowledge.rssnewsreader.util
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.foreknowledge.rssnewsreader.RSS_URL
-import com.foreknowledge.rssnewsreader.adapter.NewsRecyclerAdapter
 import com.foreknowledge.rssnewsreader.model.data.News
 import com.foreknowledge.rssnewsreader.util.HtmlParser.parseHtmlDataAndFill
 import com.prof.rssparser.Parser
@@ -23,7 +23,8 @@ object RssParser {
     private val tag = javaClass.simpleName
 
     fun execute(
-        adapter: NewsRecyclerAdapter,
+        newsLiveList: MutableLiveData<List<News>>,
+        notifyItemChanged:(id: Int) -> Unit,
         endLoading: () -> Unit,
         showFailMsg: () -> Unit
     ) {
@@ -42,14 +43,16 @@ object RssParser {
                         )
                     )
                 }
-                adapter.updateItems(newsList)
+                newsLiveList.postValue(newsList)
 
                 val jobs = mutableListOf<Job>()
                 for (news in newsList)
                     jobs.add(
                         launch {
                             news.parseHtmlDataAndFill()
-                            CoroutineScope(Dispatchers.Main).launch { adapter.notifyItemChanged(news.id) }
+                            CoroutineScope(Dispatchers.Main).launch {
+                                notifyItemChanged(news.id)
+                            }
                         }
                     )
 

@@ -18,9 +18,10 @@ abstract class BaseRecyclerAdapter<B : ViewDataBinding, T : Any>(
 
     fun getItem(position: Int) = items[position]
 
-    open fun updateItems(newItems: List<T>?) {
+    open fun replaceItems(newItems: List<T>?) {
         if (newItems != null) {
             items = newItems
+            notifyDataSetChanged()
         }
     }
 
