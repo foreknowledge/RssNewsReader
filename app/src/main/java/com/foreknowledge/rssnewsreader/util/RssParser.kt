@@ -36,11 +36,7 @@ object RssParser {
                 for ((i, article) in articles.withIndex()) {
                     Log.d("tag", "title = ${article.title}")
                     newsList.add(
-                        News(
-                            id = i,
-                            title = article.title,
-                            link = article.link
-                        )
+                        News(id = i, title = article.title, link = article.link)
                     )
                 }
                 newsLiveList.postValue(newsList)
